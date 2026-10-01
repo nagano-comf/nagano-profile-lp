@@ -16,6 +16,14 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://nagano.comfortable-noise.co.jp/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XD5KJJPN67"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XD5KJJPN67');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
@@ -173,5 +181,13 @@ a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
   </div>
 
 </main>
+<script>
+document.addEventListener('click', function(e){
+  var a = e.target.closest('a');
+  if(!a || typeof gtag !== 'function') return;
+  if(a.classList.contains('mail')) gtag('event', 'contact_click', {method: 'email'});
+  else if(a.closest('.svc')) gtag('event', 'service_click', {service: a.hostname});
+});
+</script>
 </body>
 </html>
