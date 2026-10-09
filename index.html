@@ -94,12 +94,19 @@ li::before{content:"";position:absolute;left:0;top:.95em;width:.45rem;height:1px
 /* 連絡 */
 .contact{margin-top:5rem;padding-top:2.25rem;border-top:1px solid var(--rule)}
 .contact p{font-size:1.05rem}
-.mail{
+.box{
   display:inline-block;margin-top:1.1rem;
-  color:var(--indigo);font-size:1.1rem;font-weight:500;
-  text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:.1rem;
+  padding:.8rem 1.9rem;
+  background:var(--indigo);color:var(--paper);
+  font-size:1.05rem;font-weight:500;letter-spacing:.04em;
+  text-decoration:none;border-radius:3px;
+  transition:background .15s ease,transform .15s ease;
 }
-.mail:hover,.mail:focus-visible{border-bottom-width:2.5px}
+.box:hover,.box:focus-visible{background:#243B62;transform:translateY(-1px)}
+.box:active{transform:none}
+.contact p.quiet{font-size:.95rem}
+.inline{color:var(--indigo);text-decoration:none;border-bottom:1px solid currentColor}
+.inline:hover,.inline:focus-visible{border-bottom-width:2px}
 .sig{margin-top:3rem;color:var(--ink-soft);font-size:.9rem;line-height:1.7}
 
 a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
@@ -175,8 +182,10 @@ a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
   </section>
 
   <div class="contact">
-    <p>60分の壁打ちから入れます。紹介でも、直接でも。</p>
-    <a class="mail" href="mailto:nagano@comfortable-noise.com">nagano@comfortable-noise.com</a>
+    <p>困ったら、ここに投げてください。依頼の形になっていなくて大丈夫です。</p>
+    <a class="box" href="https://docs.google.com/forms/d/e/1FAIpQLSfPFrCxOiZm5Nmnpmn7M0ApW_SUUmubWdnCuspMn8inx3HZ2A/viewform" target="_blank" rel="noopener">質問箱に書く</a>
+    <p class="quiet" style="margin-top:.9rem">書くのは「困っていること、ざっくり」と「連絡先」の2つだけ。返事は私が直接します。</p>
+    <p class="quiet" style="margin-top:.4rem">メールのほうがよければ <a class="inline" href="mailto:nagano@comfortable-noise.com">nagano@comfortable-noise.com</a></p>
     <p class="sig">長野 俊和<br>株式会社コンフォータブルノイズ（東京・西新宿）<br>一人法人。社員はいません。私が動けなくなったら閉じる設計です。</p>
   </div>
 
@@ -185,7 +194,8 @@ a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
 document.addEventListener('click', function(e){
   var a = e.target.closest('a');
   if(!a || typeof gtag !== 'function') return;
-  if(a.classList.contains('mail')) gtag('event', 'contact_click', {method: 'email'});
+  if(a.classList.contains('box')) gtag('event', 'contact_click', {method: 'form'});
+  else if(a.classList.contains('inline')) gtag('event', 'contact_click', {method: 'email'});
   else if(a.closest('.svc')) gtag('event', 'service_click', {service: a.hostname});
 });
 </script>
